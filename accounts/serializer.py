@@ -39,3 +39,10 @@ class SighUpSerializer(serializers.ModelSerializer):
         UserProfile.objects.create(user= user, date_birth= date_birth , gender= gender,
                                    full_name= user.first_name.capitalize() + ' ' + user.last_name.capitalize())
         return user
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
