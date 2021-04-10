@@ -16,7 +16,7 @@ class Schedule(models.Model):
     time = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.time
+        return f'{self.day} {self.time}'
 
 
 class DrTime(models.Model):
@@ -29,4 +29,4 @@ class DrTime(models.Model):
     ))
 
     def __str__(self):
-        return f'{self.doctor} {self.status}'
+        return f'{self.doctor} {self.schedule} {self.status}'
