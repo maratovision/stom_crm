@@ -63,16 +63,6 @@ class DrTimeDetailView(views.APIView):
         if serializer.is_valid():
             reason = serializer.data.get('reason')
             Order.objects.create(client=profile, doctor=doctor, dr_time=drtime, reason=reason)
-            if drtime.status == 'empty' and sche
-
-
-
-
-
-
-
-
-
             return Response({"Data": "ok!"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
 
