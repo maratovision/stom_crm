@@ -1,6 +1,6 @@
 from rest_framework import serializers, status
 from rest_framework.exceptions import ValidationError
-
+from schedule.serializer import DrTimeSerializer
 from accounts.models import *
 
 
@@ -9,6 +9,14 @@ class StomProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = StomProfile
         fields = '__all__'
+
+class StomProfileDetailSerializer(serializers.ModelSerializer):
+
+    drtime = DrTimeSerializer(many=True)
+
+    class Meta:
+        model = StomProfile
+        fields = ['id', 'user', 'full_name', 'position', 'bio', 'exp', 'education' ,'drtime']
 
 
 class SighUpSerializer(serializers.ModelSerializer):

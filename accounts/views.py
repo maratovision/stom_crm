@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from .serializer import *
 from rest_framework import views, status
+from order.serializer import *
+from schedule.serializer import DrTimeSerializer
 
 
 class StomProfileView(views.APIView):
@@ -34,3 +36,43 @@ class UserProfileView(views.APIView):
         client = UserProfile.objects.all()
         serializer = UserProfileSerializer(client, many=True)
         return Response(serializer.data)
+
+
+class StomProfileDetailView(views.APIView):
+
+    def get(self, request, *args, **kwargs):
+        doctor = StomProfile.objects.get(id=kwargs['stomprofile_id'])
+        serializer = StomProfileDetailSerializer(doctor)
+        return Response(serializer.data)
+
+
+
+
+class DrTimeDetailView(views.APIView):
+
+    def get(self, request, *args, **kwargs):
+        drtime = DrTime.objects.get(id=kwargs['drtime_id'],doctor_id=kwargs['stomprofile_id'])
+        serializer = DrTimeSerializer(drtime)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        profile = UserProfile.objects.get(user=request.user)
+        drtime = DrTime.objects.get(id=kwargs['drtime_id'], doctor_id=kwargs['stomprofile_id'])
+        doctor = drtime.doctor
+        serializer = OrderHardSerializer(data=request.data)
+        if serializer.is_valid():
+            reason = serializer.data.get('reason')
+            Order.objects.create(client=profile, doctor=doctor, dr_time=drtime, reason=reason)
+            if drtime.status == 'empty' and sche
+
+
+
+
+
+
+
+
+
+            return Response({"Data": "ok!"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)
+

@@ -21,7 +21,7 @@ class Schedule(models.Model):
 
 class DrTime(models.Model):
     """This model is for create doctor's page"""
-    doctor = models.ForeignKey(StomProfile, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(StomProfile, on_delete=models.CASCADE, related_name='drtime')
     schedule = models.OneToOneField(Schedule, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=(
         ('empty', 'empty'),

@@ -7,3 +7,6 @@ class DrTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = DrTime
         fields = '__all__'
+
+
+

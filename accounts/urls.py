@@ -3,7 +3,9 @@ from .views import *
 
 
 urlpatterns = [
-    path('',StomProfileView.as_view(),name= 'staff'),
+    path('stom/',StomProfileView.as_view(),name= 'staff'),
     path('signup/', SighUpView.as_view(), name= 'login'),
-    path('clients/', UserProfileView.as_view(), name= 'clients')
+    path('clients/', UserProfileView.as_view(), name= 'clients'),
+    path('stom/<int:stomprofile_id>/', StomProfileDetailView.as_view()),
+    path('stom/<int:stomprofile_id>/<int:drtime_id>/', DrTimeDetailView.as_view())
 ]
